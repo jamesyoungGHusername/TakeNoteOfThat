@@ -4,7 +4,22 @@ const uuid = require('../helpers/uuid');
 
 // GET Route for retrieving all the notes
 notes.get('/', (req, res) => {
-  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+  console.log("in api get notes")
+  readFromFile('./db/db.json')
+  .then((data) => {
+    console.log(JSON.parse(data));
+    res.json(JSON.parse(data))
+  });
+});
+
+notes.delete('/:id',(rec,res)=>{
+  readFromFile('./db/db.json')
+  .then((data) => {
+    console.log(JSON.parse(data));
+    for(const note of data){
+      console.log(note.id);
+    }
+  });
 });
 
 notes.post('/', (req, res) => {
@@ -14,7 +29,7 @@ notes.post('/', (req, res) => {
       const newNote = {
         title,
         text,
-        note_id: uuid(),
+        id: uuid(),
       };
   
       readAndAppend(newTip, './db/db.json');
