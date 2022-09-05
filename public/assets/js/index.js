@@ -56,7 +56,7 @@ async function deleteNote(id) {
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
-
+  console.log("in render active note");
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
@@ -117,7 +117,8 @@ const handleNewNoteView = (e) => {
   renderActiveNote();
 };
 
-const handleRenderSaveBtn = () => {
+const handleRenderSaveBtn = (event) => {
+  console.log("in render save");
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     hide(saveNoteBtn);
   } else {
@@ -195,10 +196,12 @@ function removeAllChildNodes(from) {
 
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
-
-if (window.location.pathname === '/notes') {
+console.log(window.location.pathname);
+if (window.location.pathname === '/notes.html') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
+  console.log("Note title stuff: "+noteTitle);
+  console.log(noteText);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
