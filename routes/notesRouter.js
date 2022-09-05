@@ -1,5 +1,5 @@
 const notes = require('express').Router();
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
+const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 const uuid = require('../helpers/uuid');
 
 // GET Route for retrieving all the notes
@@ -12,31 +12,46 @@ notes.get('/', (req, res) => {
   });
 });
 
-notes.delete('/:id',(rec,res)=>{
-  readFromFile('./db/db.json')
-  .then((data) => {
-    console.log(JSON.parse(data));
-    for(const note of data){
-      console.log(note.id);
-    }
+notes.delete('/:id',(req,res)=>{
+  if(req.params.id){
+    readFromFile('./db/db.json')
+    .then((data) => {
+      let parsed = JSON.parse(data);
+      let i = 0;
+      while(i<parsed.length){
+        if(req.params.id == parsed[i].id){
+          break;
+        }
+        i++;
+      }
+      parsed.splice(i,1);
+      writeToFile('./db/db.json',parsed);
+      res.json(`Note deleted`);
   });
+  }else{
+    res.error('Error in deleting note');
+  }
+  
 });
 
 notes.post('/', (req, res) => {
-    const { username, topic, tip } = req.body;
-  
+  console.log(req.body);
     if (req.body) {
-      const newNote = {
-        title,
-        text,
-        id: uuid(),
-      };
+      const newNote = new Note(req.body.title,req.body.text,uuid());
   
-      readAndAppend(newTip, './db/db.json');
+      readAndAppend(newNote, './db/db.json');
       res.json(`Note added`);
     } else {
       res.error('Error in adding note');
     }
   });
+
+class Note{
+  constructor(title,text,id){
+    this.text=text;
+    this.title=title;
+    this.id=id;
+  }
+}
 
   module.exports = notes;
