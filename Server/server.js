@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const { clog } = require('./middleware/clog');
 const api = require('./routes/index.js');
+const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 
 const PORT = 3001;
 
@@ -24,8 +25,11 @@ app.get('/notes.html',(req,res)=>{
 });
 
 app.get("/api/notes",(req,res)=>{
-  console.log("testing in get notes")
-  res.sendFile(path.join(__dirname,"../Client/public/notes.html"))
+  readFromFile('./db/db.json')
+  .then((data) => {
+    console.log(JSON.parse(data));
+    res.json(JSON.parse(data))
+  });
 });
 
 app.listen(process.env.PORT || 3000);
