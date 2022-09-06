@@ -14,10 +14,11 @@ app.use('/api', api);
 app.use(express.static('../Client/public/'));
 
 // GET Route for homepage
+
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, '../Client/public/index.html'))
 );
-app.get('/notes',(req,res)=>{
+app.get('/notes.html',(req,res)=>{
     res.sendFile(path.join(__dirname,"../Client/public/notes.html"))
 });
 
