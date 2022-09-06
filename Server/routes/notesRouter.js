@@ -7,7 +7,7 @@ const fs = require('fs');
 notes.get('/', (req, res) => {
   //console.log("in api get notes")
 try {
-  const data = fs.readFileSync('/Users/joe/test.txt', 'utf8');
+  const data = fs.readFileSync('../db/db.json', 'utf8');
   res.json(JSON.parse(data))
 } catch (err) {
   console.log(err);
