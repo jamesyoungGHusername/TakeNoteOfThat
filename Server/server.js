@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const { clog } = require('./middleware/clog');
 const api = require('./routes/index.js');
-const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
+const { readFromFile, readAndAppend, writeToFile } = require('./helpers/fsUtils');
 
 const PORT = 3001;
 
