@@ -1,15 +1,17 @@
 const notes = require('express').Router();
 const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 const uuid = require('../helpers/uuid');
+const fs = require('fs');
 
 // GET Route for retrieving all the notes
 notes.get('/', (req, res) => {
   //console.log("in api get notes")
-  readFromFile('../db/db.json')
-  .then((data) => {
-    console.log(JSON.parse(data));
-    res.json(JSON.parse(data))
-  });
+try {
+  const data = fs.readFileSync('/Users/joe/test.txt', 'utf8');
+  res.json(JSON.parse(data))
+} catch (err) {
+  console.log(err);
+}
 });
 
 notes.delete('/:id',(req,res)=>{
