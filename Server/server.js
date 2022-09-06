@@ -25,6 +25,7 @@ app.get('/notes.html',(req,res)=>{
 });
 
 app.get("/api/notes",(req,res)=>{
+  
   readFromFile('./db/db.json')
   .then((data) => {
     console.log(JSON.parse(data));
@@ -32,4 +33,7 @@ app.get("/api/notes",(req,res)=>{
   });
 });
 
-app.listen(process.env.PORT || 3000);
+const server = app.listen(process.env.PORT || 5000, () => {
+  const port = server.address().port;
+  console.log(`Express is working on port ${port}`);
+});
