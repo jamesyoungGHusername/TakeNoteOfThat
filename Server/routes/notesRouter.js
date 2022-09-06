@@ -7,7 +7,7 @@ const fs = require('fs');
 notes.get('/', (req, res) => {
   //console.log("in api get notes")
 try {
-  const data = fs.readFileSync('./db/db.json', 'utf8');
+  const data = fs.readFileSync('../db/db.json', 'utf8');
   res.json(JSON.parse(data))
 } catch (err) {
   console.log(err);
@@ -16,7 +16,7 @@ try {
 
 notes.delete('/:id',(req,res)=>{
   if(req.params.id){
-    readFromFile('./db/db.json')
+    readFromFile('../db/db.json')
     .then((data) => {
       let parsed = JSON.parse(data);
       let i = 0;
@@ -27,7 +27,7 @@ notes.delete('/:id',(req,res)=>{
         i++;
       }
       parsed.splice(i,1);
-      writeToFile('./db/db.json',parsed);
+      writeToFile('../db/db.json',parsed);
       res.json(`Note deleted`);
   });
   }else{
