@@ -11,7 +11,7 @@ app.use(clog);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//app.use('/api', api);
+app.use('/api', api);
 app.use(express.static(path.join(__dirname,'../Client/public/')));
 
 // GET Route for homepage
@@ -24,14 +24,14 @@ app.get('/notes.html',(req,res)=>{
     res.sendFile(path.join(__dirname,"../Client/public/notes.html"))
 });
 
-app.get("/api/notes",(req,res)=>{
+// app.get("/api/notes",(req,res)=>{
   
-  readFromFile('./db/db.json')
-  .then((data) => {
-    console.log(JSON.parse(data));
-    res.json(JSON.parse(data))
-  });
-});
+//   readFromFile('./db/db.json')
+//   .then((data) => {
+//     console.log(JSON.parse(data));
+//     res.json(JSON.parse(data))
+//   });
+// });
 
 const server = app.listen(process.env.PORT || 5000, () => {
   const port = server.address().port;
