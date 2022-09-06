@@ -10,7 +10,7 @@ app.use(clog);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', api);
+//app.use('/api', api);
 app.use(express.static(path.join(__dirname,'../Client/public/')));
 
 // GET Route for homepage
@@ -18,8 +18,14 @@ app.use(express.static(path.join(__dirname,'../Client/public/')));
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '../Client/public/index.html'))
 );
+
 app.get('/notes.html',(req,res)=>{
     res.sendFile(path.join(__dirname,"../Client/public/notes.html"))
+});
+
+app.get("/api/notes",(req,res)=>{
+  console.log("testing in get notes")
+  res.sendFile(path.join(__dirname,"../Client/public/notes.html"))
 });
 
 app.listen(process.env.PORT || 3000);
