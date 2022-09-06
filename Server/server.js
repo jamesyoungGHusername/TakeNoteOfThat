@@ -11,17 +11,17 @@ app.use(clog);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api', api);
-app.use(express.static('public'));
+app.use(express.static('../Client/public/'));
 
 // GET Route for homepage
 app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
+  res.sendFile(path.join(__dirname, '../Client/public/index.html'))
 );
 app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
+  res.sendFile(path.join(__dirname, '../Client/public/index.html'))
 );
 app.get('/notes',(req,res)=>{
-    res.sendFile(path.join(__dirname,'/public/notes.html'))
+    res.sendFile(path.join(__dirname,"../Client/public/notes.html"))
 });
 
 app.listen(PORT, () =>

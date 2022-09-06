@@ -3,7 +3,7 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-
+console.log(window.location.pathname);
 if (window.location.pathname === '/notes.html') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -71,7 +71,7 @@ const renderActiveNote = () => {
 };
 
 const handleNoteSave = () => {
-  console.log("in handle not save");
+  console.log("in handle note save");
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,

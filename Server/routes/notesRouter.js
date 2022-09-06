@@ -4,7 +4,7 @@ const uuid = require('../helpers/uuid');
 
 // GET Route for retrieving all the notes
 notes.get('/', (req, res) => {
-  console.log("in api get notes")
+  //console.log("in api get notes")
   readFromFile('./db/db.json')
   .then((data) => {
     console.log(JSON.parse(data));
