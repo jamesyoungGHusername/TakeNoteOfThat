@@ -16,7 +16,7 @@ try {
 
 notes.delete('/:id',(req,res)=>{
   if(req.params.id){
-    readFromFile('../db/db.json')
+    readFromFile('Server/db/db.json')
     .then((data) => {
       let parsed = JSON.parse(data);
       let i = 0;
@@ -27,7 +27,7 @@ notes.delete('/:id',(req,res)=>{
         i++;
       }
       parsed.splice(i,1);
-      writeToFile('../db/db.json',parsed);
+      writeToFile('Server/db/db.json',parsed);
       res.json(`Note deleted`);
   });
   }else{
@@ -41,7 +41,7 @@ notes.post('/', (req, res) => {
     if (req.body) {
       const newNote = new Note(req.body.title,req.body.text,uuid());
   
-      readAndAppend(newNote, './db/db.json');
+      readAndAppend(newNote, 'Server/db/db.json');
       res.json(`Note added`);
     } else {
       res.error('Error in adding note');
